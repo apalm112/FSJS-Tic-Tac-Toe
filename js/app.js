@@ -35,6 +35,11 @@
     isWinner: false
   };
 
+  // Hide the various winning screens.
+  $finish1.css('display', 'none');
+  $finish2.css('display', 'none');
+  $tie.css('display', 'none');
+
 // Main Function ------------------------------
 
   // On page load, show the start screen.
@@ -44,9 +49,10 @@
   // On button click, start the game.
   $button.on('click', function() {
     $start.css('display', 'none');
+    $finish1.css('display', 'none');
+    $finish2.css('display', 'none');
     $player1.toggleClass('active');
-    play(player1);
-    pickSquare(player1);
+    togglePlayer();
   });
 
   function play(player) {
@@ -68,23 +74,33 @@
     )
   }
 
-
-  $finish1.css('display', 'none');
-  $finish2.css('display', 'none');
-  $tie.css('display', 'none');
-
-
   function increaseCount() {
     if (count < 9) {
       togglePlayer();
-    } else if (count > 9) {
+    } else if (count === 9) {
       $finish1.css('display', 'block');
+      count = 0;
     }
   }
 
   function togglePlayer() {
-    $player1.toggleClass('active');
-    $player2.toggleClass('active');
+    // Changes the active O or X on game board.
+    if (count === 0) {
+      $player1.toggleClass('active');
+      $player2.toggleClass('active');
+      play(player1);
+      pickSquare(player1);
+    } else if (count != 0 && $player1.hasClass('active')) {
+      $player1.toggleClass('active');
+      $player2.toggleClass('active');
+      play(player1);
+      pickSquare(player1);
+    } else if ($player2.hasClass('active')) {
+      $player1.toggleClass('active');
+      $player2.toggleClass('active');
+      play(player2);
+      pickSquare(player2);
+    }
   }
 
 
