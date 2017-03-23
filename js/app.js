@@ -19,6 +19,8 @@
   const game = document.querySelectorAll('.boxes');
   let count = 0;
 
+
+
   const player1 = {
     name: 'player1',
     bgColor: '#FFA000',
@@ -45,15 +47,40 @@
   // On page load, show the start screen.
   $(document).ready(function() {
     $start.css('display', 'block');
+    // call a function which controls the start button
+    // and won't start game until a name is entered
+    startGame();
   });
-  // On button click, start the game.
-  $button.on('click', function() {
-    $start.css('display', 'none');
-    $finish1.css('display', 'none');
-    $finish2.css('display', 'none');
-    $player1.toggleClass('active');
-    togglePlayer();
-  });
+
+
+  function enterName() {
+    const playerOneInput = document.getElementById('name1');
+    const playerOneLabel = document.getElementsByClassName('nameOne');
+    const playerTwoInput = document.getElementById('name2');
+    const playerTwoLabel = document.getElementsByClassName('nameTwo');
+
+    if (playerOneInput.value != '' && playerTwoInput.value != '') {
+      playerOneLabel[0].textContent = playerOneInput.value;
+      playerTwoLabel[0].textContent = playerTwoInput.value;
+      $start.css('display', 'none');
+      $finish1.css('display', 'none');
+      $finish2.css('display', 'none');
+    } else {
+      playerOneInput.placeholder = 'Enter Player 1 Name!';
+      playerTwoInput.placeholder = 'Enter Player 2 Name!';
+    }
+  }
+
+  function startGame() {
+    // On button click, start the game.
+    $button.on('click', function() {
+      enterName();
+      $player1.toggleClass('active');
+      togglePlayer();
+    });
+  }
+
+
 
   function play(player) {
     $('.box').hover(
