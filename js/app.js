@@ -66,17 +66,15 @@
       $finish1.css('display', 'none');
       $finish2.css('display', 'none');
     } else {
-      playerOneInput.placeholder = 'Enter A Name!';
-      playerTwoInput.placeholder = 'Enter A Name!';
+      playerOneInput.placeholder = 'Enter Player 1 Name!';
+      playerTwoInput.placeholder = 'Enter Player 2 Name!';
     }
   }
 
   function startGame() {
-    // Put the $button.on() inside a function
     // On button click, start the game.
     $button.on('click', function() {
       enterName();
-
       $player1.toggleClass('active');
       togglePlayer();
     });
