@@ -54,12 +54,19 @@
 
 
   function enterName() {
-    const nameOneInput = document.getElementById('name1');
-    const nameOne = document.getElementsByClassName('playerOneName');
-    if (nameOneInput.value != '') {
-      nameOne[0].textContent = nameOneInput.value;
+    const playerOneInput = document.getElementById('name1');
+    const playerOneLabel = document.getElementsByClassName('nameOne');
+
+    const playerTwoInput = document.getElementById('name2');
+    const playerTwoLabel = document.getElementsByClassName('nameTwo');
+
+    if (playerOneInput.value != '' && playerTwoInput.value != '') {
+      playerOneLabel[0].textContent = playerOneInput.value;
+      playerTwoLabel[0].textContent = playerTwoInput.value;
+
     } else {
-      nameOneInput.value = 'Enter A Name';
+      playerOneInput.value = 'Enter A Name';
+      playerTwoInput.value = 'Enter A Name';
     }
   }
 
@@ -67,11 +74,11 @@
     // Put the $button.on() inside a function
     // On button click, start the game.
     $button.on('click', function() {
+      enterName();
       $start.css('display', 'none');
       $finish1.css('display', 'none');
       $finish2.css('display', 'none');
       $player1.toggleClass('active');
-      enterName();
       togglePlayer();
     });
   }
