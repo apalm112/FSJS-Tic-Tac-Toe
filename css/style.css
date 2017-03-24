@@ -153,3 +153,18 @@ header input {
     .boxes .box-filled-2 {
       background-color: #3688C3;
       background-image: url(../img/x.svg); }
+
+
+  /*My Code changes*/
+  .win-screen {
+    /*for the 'Tic-Tac-Toe' on winner screens*/
+    margin-bottom: 200px;
+  }
+  .winner-screen {
+    /*for the 'Winner'*/
+    margin-bottom: 250px;
+    font-size: 5em;
+  }
+  .new-game {
+  margin-top: 14em;
+}
