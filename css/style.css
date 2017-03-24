@@ -155,16 +155,27 @@ header input {
       background-image: url(../img/x.svg); }
 
 
-  /*My Code changes*/
-  .win-screen {
-    /*for the 'Tic-Tac-Toe' on winner screens*/
-    margin-bottom: 200px;
-  }
-  .winner-screen {
-    /*for the 'Winner'*/
-    margin-bottom: 250px;
-    font-size: 5em;
-  }
-  .new-game {
-  margin-top: 14em;
+/*My Code changes---------------------------------------------*/
+.win-screen {
+  /*for the 'Tic-Tac-Toe' on winner screens*/
+  margin-bottom: 200px;
+}
+.winner-screen {
+  /*for the 'Winner'*/
+  margin-bottom: 145px;
+  font-size: 5em;
+}
+.new-game {
+  /*for 'New Game' button*/
+margin-top: 14em;
+}
+.win-size-O {
+  /*for svg graphic to be moar bigger*/
+  width: 120px;
+  height: 120px;
+}
+.win-size-X {
+  /*for svg graphic to be moar bigger*/
+  width: 120px;
+  height: 120px;
 }
