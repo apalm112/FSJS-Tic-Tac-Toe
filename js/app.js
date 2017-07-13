@@ -52,6 +52,10 @@
   // EVEN BEING USED??????????
   const game = document.querySelectorAll('.boxes');
 
+  // Trying to code 7/13/17
+  let gridSquare = document.querySelectorAll('.box');
+
+
   function setGridToZero(num) {
     let liZero = document.querySelectorAll('.box');
     for (let idx=0;idx<liZero.length;idx++) {
