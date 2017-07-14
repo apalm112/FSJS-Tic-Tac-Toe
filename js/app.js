@@ -150,7 +150,8 @@
   function hover(player) {
   // Meets rubric: When the current player mouses over an empty square on the board, it's symbol the X or O should appear on the square. Also does color, NOT NEEDED.
     $('.box').hover(function() {
-    // Function Is working fine.
+    // TODO: Function Is NOT working fine!
+    // In console Elements on hover for player2 class="box box-filled-1 box-filled-2"
     	if ($(this)[0].attributes[1].value === 'hobbits') {
     	//	console.log("TATERS 4 U");
         $(this).toggleClass(player.boxFill);
@@ -175,14 +176,12 @@
           $(this).css({'background-color': player.bgColor});
       // Set atr to 'O' or 'X'
           $(this)[0].setAttribute('fuck', player.grid);
-
-      //    $(this).off('click');  not working
         }
 
         console.log('Player is: ' + player.grid);
         count++;
         console.log(count + ' <--count, FUCK THIS SHIT!');
-        increaseCount($(this));
+        increaseCount();
       });
   }
 
