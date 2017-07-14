@@ -80,6 +80,16 @@
     grid: 'X'
   };
 
+  let liNodeList = document.querySelectorAll('.box');
+
+  let liHTMLCollection = document.getElementsByClassName('.box');
+
+  const boardState = {
+    // Object to experiment w/ making an Object to track the state of the game in the DOM & maybe help control the game w/ its own methods.
+
+
+
+  };
 
 // Main Functions ------------------------------------------------------------
 
@@ -119,69 +129,91 @@
     // On button click, start the game.
     $button.on('click', function() {
       enterName();
-    //  $player1.toggleClass('active');
       setGridToZero('hobbits');
-      togglePlayer();
+      $player1.toggleClass('active');
+      hover(player1);
+      clickIt(player1);
+    //  togglePlayer();
     });
   }
 
   let liZero = document.querySelectorAll('.box');
+  // TEST LINE BELOW
+  let turd = document.getElementsByClassName('.box');
 
   function setGridToZero(num) {
     for (let idx=0;idx<liZero.length;idx++) {
-      liZero[idx].setAttribute('fuck', num);
+     liZero[idx].setAttribute('fuck', num);
     }
   }
 
   function hover(player) {
-    // Meets rubric: When the current player mouses over an empty square on the board, it's symbol the X or O should appear on the square. Also does color, NOT NEEDED.
-      $('.box').hover(
-        function() {
-        // Function Seems to be working fine.
-          	if ($(this)[0].attributes[1].value === 'hobbits') {
-          	//	console.log("TATERS 4 U");
-              $(this).toggleClass(player.boxFill);
-              }
+  // Meets rubric: When the current player mouses over an empty square on the board, it's symbol the X or O should appear on the square. Also does color, NOT NEEDED.
+    $('.box').hover(function() {
+    // Function Is working fine.
+    	if ($(this)[0].attributes[1].value === 'hobbits') {
+    	//	console.log("TATERS 4 U");
+        $(this).toggleClass(player.boxFill);
+        }
+    });
+  }
 
-        });
-    $('.box').click(
-      function() {
-        // Function Seems to be working fine.
-        console.log('$(this) is on line below: ');
-        console.log( $(this) );
 
-        if ($(this)[0].attributes[1].value === 'hobbits') {
+  function clickIt(player) {
+    // TODO: function is not dropping player1 class box-filled-1, won't add a 'X' to the game board.
+    // Slack from N Hampton: You would assign another .one() handler to each of those boxes in that instance. `jQuery.one()` is the same as `jQuery.on()`, except that it runs `$(this).off(event)` at the end of the callback
+    // $('.box').click(
+    //   function() {
+      $('.box').one('click', function() {
+        if ($(this)[0].attributes[1].value === 'hobbits') { // This line works, checked in console!
+        // Conditional checks the board li to see if it's MT, if MT then change color/img.
+          console.log('$(this) is on line below: ');
+          console.log( $(this)[0].attributes[1].value );
+          console.log( $(this) );
 
           $(this).css({'background-image': 'url(' + player.svg + ')'});
           $(this).css({'background-color': player.bgColor});
-
+      // Set atr to 'O' or 'X'
           $(this)[0].setAttribute('fuck', player.grid);
-        }
 
+      //    $(this).off('click');  not working
+        }
 
         console.log('Player is: ' + player.grid);
         count++;
         console.log(count + ' <--count, FUCK THIS SHIT!');
-        increaseCount();
+        increaseCount($(this));
       });
   }
 
-  function pickSquare(player) {
-    // Function to check & set atr value of grid square to 'O' or 'X'
-    if ($('.box').getAttribute('value') === 'hobbits') {
-      $('.box').click(
 
-      )
+
+  function turnController() {
+    // ?Function to check & set atr value of grid square to 'O' or 'X'?
+    // And to control the flow of the game, ie.-- switching turns for players
+    if (count === 0) {
+
     }
+
   }
 
   function increaseCount() {
     // NOT WORKING
-    if (count < 9) {
+    if ( $player1.hasClass('active')) {
     // togglePlayer();
+      $player1.toggleClass('active');
+      $player2.toggleClass('active');
+      hover(player2);
+      //clickIt(player2);
+    } else if ($player2.hasClass('active')) {
+      $player2.toggleClass('active');
+      $player1.toggleClass('active');
+      hover(player1);
+      //clickIt(player1);
     } else if (count >= 9) {
       $finish1.css('display', 'block');
       count = 0;
+      startGame();
     }
   }
 
@@ -191,35 +223,11 @@
     if (count === 0) {  // Only runs at start of new game to turn on player1
       $player1.toggleClass('active'); // turn on player1
       hover(player1);
-    } else if (count === 1) {
+    } else if (count > 0 && count < 2) {
         $player1.toggleClass('active');
         $player2.toggleClass('active');
         hover(player2);
-    } else if (count === 2) {
-        $player1.toggleClass('active');
-        $player2.toggleClass('active');
-        hover(player1);
-    } else if (count === 3) {
-        $player1.toggleClass('active');
-        $player2.toggleClass('active');
-        hover(player2);
-    } else if (count === 4) {
-        $player1.toggleClass('active');
-        $player2.toggleClass('active');
-        hover(player1);
-    } else if (count === 5) {
-        $player1.toggleClass('active');
-        $player2.toggleClass('active');
-        hover(player2);
-    } else if (count === 6) {
-        $player1.toggleClass('active');
-        $player2.toggleClass('active');
-        hover(player1);
-    } else if (count === 7) {
-        $player1.toggleClass('active');
-        $player2.toggleClass('active');
-        hover(player2);
-    } else if (count === 8) {
+    } else if (count >= 2) {
         $player1.toggleClass('active');
         $player2.toggleClass('active');
         hover(player1);
