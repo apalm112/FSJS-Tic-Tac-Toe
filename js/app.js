@@ -137,7 +137,7 @@
     // Meets rubric: When the current player mouses over an empty square on the board, it's symbol the X or O should appear on the square. Also does color, NOT NEEDED.
       $('.box').hover(
         function() {
-
+        // Function Seems to be working fine.
           	if ($(this)[0].attributes[1].value === 'hobbits') {
           	//	console.log("TATERS 4 U");
               $(this).toggleClass(player.boxFill);
@@ -146,15 +146,22 @@
         });
     $('.box').click(
       function() {
+        // Function Seems to be working fine.
+        console.log('$(this) is on line below: ');
         console.log( $(this) );
-        $(this).css({'background-image': 'url(' + player.svg + ')'});
-        $(this).css({'background-color': player.bgColor});
 
-        $(this)[0].setAttribute('fuck', player.grid);
+        if ($(this)[0].attributes[1].value === 'hobbits') {
 
-        console.log(player.grid);
+          $(this).css({'background-image': 'url(' + player.svg + ')'});
+          $(this).css({'background-color': player.bgColor});
+
+          $(this)[0].setAttribute('fuck', player.grid);
+        }
+
+
+        console.log('Player is: ' + player.grid);
         count++;
-        console.log(count + ' FUCK THIS SHIT!');
+        console.log(count + ' <--count, FUCK THIS SHIT!');
         increaseCount();
       });
   }
@@ -171,7 +178,7 @@
   function increaseCount() {
     // NOT WORKING
     if (count < 9) {
-    //  togglePlayer();
+    // togglePlayer();
     } else if (count >= 9) {
       $finish1.css('display', 'block');
       count = 0;
