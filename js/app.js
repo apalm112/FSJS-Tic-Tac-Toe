@@ -128,7 +128,10 @@
   function startGame() {
     // On button click, start the game.
     $button.on('click', function() {
-      enterName();
+    //  enterName();
+    $start.css('display', 'none');
+    $finish1.css('display', 'none');
+    $finish2.css('display', 'none');
       setGridToZero('hobbits');
       $player1.toggleClass('active');
       hover(player1);
@@ -149,13 +152,11 @@
 
   function hover(player) {
   // Meets rubric: When the current player mouses over an empty square on the board, it's symbol the X or O should appear on the square. Also does color, NOT NEEDED.
+  // Function checks if grid square is empty, if so then displays current player symbol & color on grid.
     $('.box').hover(function() {
-    // TODO: Function Is NOT working fine!
-    // In console Elements on hover for player2 class="box box-filled-1 box-filled-2"
-    	if ($(this)[0].attributes[1].value === 'hobbits') {
-    	//	console.log("TATERS 4 U");
+      if ($(this)[0].attributes[1].value === 'hobbits') {
         $(this).toggleClass(player.boxFill);
-        }
+      }
     });
   }
 
@@ -168,32 +169,43 @@
       $('.box').one('click', function() {
         if ($(this)[0].attributes[1].value === 'hobbits') { // This line works, checked in console!
         // Conditional checks the board li to see if it's MT, if MT then change color/img.
-          console.log('$(this) is on line below: ');
-          console.log( $(this)[0].attributes[1].value );
-          console.log( $(this) );
+          // console.log('$(this) is on line below: ');
+          // console.log( $(this)[0].attributes[1].value );
+          // console.log( $(this) );
+
+          // turnController($(this), player);
+
 
           $(this).css({'background-image': 'url(' + player.svg + ')'});
           $(this).css({'background-color': player.bgColor});
       // Set atr to 'O' or 'X'
           $(this)[0].setAttribute('fuck', player.grid);
         }
-
-        console.log('Player is: ' + player.grid);
         count++;
-        console.log(count + ' <--count, FUCK THIS SHIT!');
-        increaseCount();
+        //  increaseCount();
+
+      //  console.log('Player is: ' + player.grid);
+      //  console.log(count + ' <--count, FUCK THIS SHIT!');
       });
   }
 
 
 
-  function turnController() {
+  function turnController(that, player) {
     // ?Function to check & set atr value of grid square to 'O' or 'X'?
     // And to control the flow of the game, ie.-- switching turns for players
-    if (count === 0) {
+    that.css({'background-image': 'url(' + player.svg + ')'});
+    that.css({'background-color': player.bgColor});
 
-    }
+    // Set atr to 'O' or 'X'
+    that[0].setAttribute('fuck', player.grid);
 
+    console.log('that is on line below: ');
+    console.log( that[0].attributes[1].value );
+    console.log( that );
+
+    console.log('Player is: ' + player.grid);
+    console.log(count + ' <--count, FUCK THIS SHIT!');
   }
 
   function increaseCount() {
@@ -223,15 +235,15 @@
       $player1.toggleClass('active'); // turn on player1
       hover(player1);
     } else if (count > 0 && count < 2) {
-        $player1.toggleClass('active');
-        $player2.toggleClass('active');
-        hover(player2);
+      $player1.toggleClass('active');
+      $player2.toggleClass('active');
+      hover(player2);
     } else if (count >= 2) {
-        $player1.toggleClass('active');
-        $player2.toggleClass('active');
-        hover(player1);
+      $player1.toggleClass('active');
+      $player2.toggleClass('active');
+      hover(player1);
     }
- }
+  }
 
   // Add the game play following these rules:
   // Play alternates between X and O.
