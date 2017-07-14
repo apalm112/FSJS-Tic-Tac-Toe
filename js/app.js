@@ -56,12 +56,6 @@
   let gridSquare = document.querySelectorAll('.box');
 
 
-  function setGridToZero(num) {
-    let liZero = document.querySelectorAll('.box');
-    for (let idx=0;idx<liZero.length;idx++) {
-      liZero[idx].value = num;
-    }
-  }
 
   // Count something????
   let count = 0;
@@ -87,7 +81,7 @@
   };
 
 
-// Main Functions -------------------------------------
+// Main Functions ------------------------------------------------------------
 
   // On page load, show the start screen.
   $(document).ready(function() {
@@ -96,12 +90,10 @@
     $finish1.css('display', 'none');
     $finish2.css('display', 'none');
     $tie.css('display', 'none');
-    setGridToZero('hobbits');
     // call a function which controls the start button
     // and won't start game until a name is entered
     startGame();
   });
-
 
   function enterName() {
     // Meets rubric EC: On the start screen, prompt the user add their name before the game starts.
@@ -128,29 +120,50 @@
     $button.on('click', function() {
       enterName();
     //  $player1.toggleClass('active');
+      setGridToZero('hobbits');
       togglePlayer();
     });
   }
 
+  let liZero = document.querySelectorAll('.box');
+
+  function setGridToZero(num) {
+    for (let idx=0;idx<liZero.length;idx++) {
+      liZero[idx].setAttribute('fuck', num);
+    }
+  }
+
   function hover(player) {
     // Meets rubric: When the current player mouses over an empty square on the board, it's symbol the X or O should appear on the square. Also does color, NOT NEEDED.
-    $('.box').hover(
+      $('.box').hover(
+        function() {
+
+          	if ($(this)[0].attributes[1].value === 'hobbits') {
+          	//	console.log("TATERS 4 U");
+              $(this).toggleClass(player.boxFill);
+              }
+
+        });
+    $('.box').click(
       function() {
-        $(this).toggleClass(player.boxFill);
+        console.log( $(this) );
+        $(this).css({'background-image': 'url(' + player.svg + ')'});
+        $(this).css({'background-color': player.bgColor});
+
+        $(this)[0].setAttribute('fuck', player.grid);
+
+        console.log(player.grid);
+        count++;
+        console.log(count + ' FUCK THIS SHIT!');
+        increaseCount();
       });
   }
 
   function pickSquare(player) {
     // Function to check & set atr value of grid square to 'O' or 'X'
-    if ($(this).value === 0) {
+    if ($('.box').getAttribute('value') === 'hobbits') {
       $('.box').click(
-        function() {
-          // $(this).value = player.grid;
-          $(this).css({'background-image': 'url(' + player.svg + ')'});
-          $(this).css({'background-color': player.bgColor});
-          count++;
-          increaseCount();
-        }
+
       )
     }
   }
@@ -158,12 +171,7 @@
   function increaseCount() {
     // NOT WORKING
     if (count < 9) {
-      // if (player1.class === 'active') {
-      //   //console.log(player1);
-      // } else {
-      //   // console.log(player2);
-      // }
-      //togglePlayer();
+    //  togglePlayer();
     } else if (count >= 9) {
       $finish1.css('display', 'block');
       count = 0;
@@ -173,26 +181,43 @@
   function togglePlayer() {
     // Changes the active O or X on game board.
     // TODO: fix toggle switching btwn players!
-        // not working on 2 3 5 6 7
     if (count === 0) {  // Only runs at start of new game to turn on player1
       $player1.toggleClass('active'); // turn on player1
       hover(player1);
-      pickSquare(player1);
-    } else if (count === 1 || count === 3 || count === 5 || count === 7) {
-      // on odd turns for 'O'
-      $player1.toggleClass('active'); // turn off player1
-      $player2.toggleClass('active'); // turn on player2
-      hover(player2);
-      pickSquare(player2);
-    } else if (count === 2 || count === 4 || count === 6 || count === 8) {
-      // on even turns for 'X'
-        $player2.toggleClass('active'); // turn off player2
-        $player1.toggleClass('active'); // turn on player1
+    } else if (count === 1) {
+        $player1.toggleClass('active');
+        $player2.toggleClass('active');
+        hover(player2);
+    } else if (count === 2) {
+        $player1.toggleClass('active');
+        $player2.toggleClass('active');
         hover(player1);
-        pickSquare(player1);
+    } else if (count === 3) {
+        $player1.toggleClass('active');
+        $player2.toggleClass('active');
+        hover(player2);
+    } else if (count === 4) {
+        $player1.toggleClass('active');
+        $player2.toggleClass('active');
+        hover(player1);
+    } else if (count === 5) {
+        $player1.toggleClass('active');
+        $player2.toggleClass('active');
+        hover(player2);
+    } else if (count === 6) {
+        $player1.toggleClass('active');
+        $player2.toggleClass('active');
+        hover(player1);
+    } else if (count === 7) {
+        $player1.toggleClass('active');
+        $player2.toggleClass('active');
+        hover(player2);
+    } else if (count === 8) {
+        $player1.toggleClass('active');
+        $player2.toggleClass('active');
+        hover(player1);
     }
-  }
-
+ }
 
   // Add the game play following these rules:
   // Play alternates between X and O.
