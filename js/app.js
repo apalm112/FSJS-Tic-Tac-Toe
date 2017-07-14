@@ -132,7 +132,7 @@
     });
   }
 
-  function play(player) {
+  function hover(player) {
     // Meets rubric: When the current player mouses over an empty square on the board, it's symbol the X or O should appear on the square. Also does color, NOT NEEDED.
     $('.box').hover(
       function() {
@@ -141,10 +141,11 @@
   }
 
   function pickSquare(player) {
+    // Function to check & set atr value of grid square to 'O' or 'X'
     if ($(this).value === 0) {
       $('.box').click(
         function() {
-          $(this).value = player.grid;
+          // $(this).value = player.grid;
           $(this).css({'background-image': 'url(' + player.svg + ')'});
           $(this).css({'background-color': player.bgColor});
           count++;
@@ -162,7 +163,7 @@
       // } else {
       //   // console.log(player2);
       // }
-      togglePlayer();
+      //togglePlayer();
     } else if (count >= 9) {
       $finish1.css('display', 'block');
       count = 0;
@@ -171,22 +172,24 @@
 
   function togglePlayer() {
     // Changes the active O or X on game board.
-    // NOT WORKING
-    if (count === 0) {
-      $player1.toggleClass('active');
-    //  $player2.toggleClass('active');
-      play(player1);
+    // TODO: fix toggle switching btwn players!
+        // not working on 2 3 5 6 7
+    if (count === 0) {  // Only runs at start of new game to turn on player1
+      $player1.toggleClass('active'); // turn on player1
+      hover(player1);
       pickSquare(player1);
-    } else if (count != 0 && $player1.hasClass('active')) {
-      $player1.toggleClass('active');
-      $player2.toggleClass('active');
-      play(player1);
-      pickSquare(player1);
-    } else if ($player2.hasClass('active')) {
-      $player1.toggleClass('active');
-      $player2.toggleClass('active');
-      play(player2);
+    } else if (count === 1 || count === 3 || count === 5 || count === 7) {
+      // on odd turns for 'O'
+      $player1.toggleClass('active'); // turn off player1
+      $player2.toggleClass('active'); // turn on player2
+      hover(player2);
       pickSquare(player2);
+    } else if (count === 2 || count === 4 || count === 6 || count === 8) {
+      // on even turns for 'X'
+        $player2.toggleClass('active'); // turn off player2
+        $player1.toggleClass('active'); // turn on player1
+        hover(player1);
+        pickSquare(player1);
     }
   }
 
