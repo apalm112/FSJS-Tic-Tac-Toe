@@ -157,22 +157,25 @@
           $(this).css({'background-color': player.bgColor});
 					// Set value to 'O' or 'X'
 					$(this)[0].setAttribute('gridValue', player.grid);
-					count++;
-					turn++;
-					console.log('Turn is: ' + turn);
-					increaseCount();
-					}
+          count++;
+          turn++;
+          console.log(turn);
+          togglePlayer();
+          }
 			});
   }
 
-  function increaseCount() {
+  function togglePlayer() {
     // Play alternates between X and O.
-    // NOT WORKING TODO:  I think this function is where the problem is.  As hover() & click() functions both work.
+    // NOT WORKING  I think this function is where the problem is.  As hover() & click() functions both work.
     // It's only when this function is called that shit starts fucking up.
+    // TODO:MAKE SEPERATE HOVER/CLICKIT FUNCTIONS, ONE FOR EACH PLAYER,
+    //      THEN CALL EACH FUNCTION WHEN TURN HAS CHANGED.
     $player1.toggleClass('active');
     $player2.toggleClass('active');
+
     hover(player2);
-		// clickIt(player2);
+    clickIt(player2);
   }
 
 })(window);
