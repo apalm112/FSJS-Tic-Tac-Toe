@@ -148,12 +148,9 @@
           });
   }
   function clickIt(player) {
-    // TODO: function is not dropping player1 class box-filled-1, won't add a 'X' to the game board.
-    // Slack from N Hampton: You would assign another .one() handler to each of those boxes in that instance. `jQuery.one()` is the same as `jQuery.on()`, except that it runs `$(this).off(event)` at the end of the callback
     $('.box').one('click', function() {
 			// Conditional checks the board li to see if it's MT, if MT then change color/img.
       if ($(this)[0].attributes[1].value === 'MT') {
-        // TODO: maybe try a IF conditional here that controls which player info is passed in the parameters.  Since clickIT function is the problem.  .one() is taking player1 params & holding onto them from the start.
         if ( $player1.hasClass('active') ) {
           $(this).css({'background-image': 'url(' + player1.svg + ')'});
           $(this).css({'background-color': player1.bgColor});
@@ -179,15 +176,13 @@
 
   function togglePlayer() {
     // Play alternates between X and O.
-    // NOT WORKING  I think this function is where the problem is.  As hover() & click() functions both work.
-    // It's only when this function is called that shit starts fucking up.
-    // TODO:MAKE SEPERATE HOVER/CLICKIT FUNCTIONS, ONE FOR EACH PLAYER,
-    //      THEN CALL EACH FUNCTION WHEN TURN HAS CHANGED.
     $player1.toggleClass('active');
     $player2.toggleClass('active');
-
     hover(player2);
     clickIt(player2);
   }
+
+	//	TODO: The game ends when one player has three of their symbols in a row either horizontally, vertically or diagonally. If all of the squares are filled and no players have three in a row, the game is a tie.
+
 
 })(window);
