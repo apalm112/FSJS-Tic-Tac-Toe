@@ -35,22 +35,47 @@
   const $player1 = $('#player1');
   const $player2 = $('#player2');
   // Gets entire game board div
-  const $board = $('#board');
+  const $board = $('.boxes');
   // Gets ul of of game board
   const $boxes = $('.boxes');
   // create MT array to hold stuff?????
-  let twoDimArr = [
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    []
-  ];
+
+
+  let checkArr = [];
   // Get all the li's of the game grid
+	let newWinCombos = [
+	// per my grid layout setup, which does not match the DOM
+	// HORIZONTAL
+		[0, 1, 2],
+		[3, 4, 5],
+		[6, 7, 8],
+	// DIAGONAL
+		[0, 4, 8],
+		[2, 4, 6],
+	// VERICAL
+		[0, 3, 6],
+		[1, 4, 7],
+		[2, 5, 8]
+	];
+
+	let checkWin = [
+	// Win combos for $board[0].childNodes[idx], which matches teh DOM!
+// HORIZONTAL		sums:
+	[1, 3, 5],	// 9
+	[7, 9, 11],	// 27
+	[13, 15, 17],	// 45
+// DIAGONAL
+	[1, 9, 17],	// 27
+	[5, 9, 13],	// 27
+// VERTICAL
+	[1, 7, 13],	// 21
+	[3, 9, 15],	// 27
+	[5, 11, 17]	// 33
+];
+
+
+
+
   const game = document.querySelectorAll('.boxes');
   // Trying to code 7/13/17
   let gridSquare = document.querySelectorAll('.box');
@@ -59,20 +84,20 @@
   let count = 0;
 
   const player1 = {
-    name: 'player1',
     bgColor: '#FFA000',
     svg: 'img/o.svg',
     boxFill: 'box-filled-1',
+		grid: 'O',
     isWinner: false,
-    grid: 'O',
+		name: 'player1'
   };
   const player2 = {
-    name: 'player2',
     bgColor: '#3688C3',
     svg: 'img/x.svg',
     boxFill: 'box-filled-2',
+		grid: 'X',
     isWinner: false,
-    grid: 'X',
+		name: 'player2'
   };
 
   let liNodeList = document.querySelectorAll('.box');
@@ -158,8 +183,8 @@
 					$(this)[0].setAttribute('gridValue', player1.grid);
           count++;
           turn++;
-          console.log(turn);
-          togglePlayer();
+          togglePlayer(player1);
+					// checkWinTie();
         } else if ( $player2.hasClass('active') ) {
           $(this).css({'background-image': 'url(' + player2.svg + ')'});
           $(this).css({'background-color': player2.bgColor});
@@ -167,22 +192,60 @@
           $(this)[0].setAttribute('gridValue', player2.grid);
           count++;
           turn++;
-          console.log(turn);
-          togglePlayer();
+          togglePlayer(player2);
+					// checkWinTie();
         }
       }
 		});
   }
 
-  function togglePlayer() {
+  function togglePlayer(player) {
     // Play alternates between X and O.
     $player1.toggleClass('active');
     $player2.toggleClass('active');
     hover(player2);
     clickIt(player2);
+		checkWinTie(player);
   }
 
 	//	TODO: The game ends when one player has three of their symbols in a row either horizontally, vertically or diagonally. If all of the squares are filled and no players have three in a row, the game is a tie.
+	function checkWinTie(player) {
+		// Function to check for Win/Tie
+		//	on click set gridValue to twoDimArr & turn++
+		//	when turn >= 5  check twoDimArr for Win
+		//	repeat until turn === 8 declare Win/Tie
+		//	use object boardState ?
+		//	NO!  Use hard code the win possibilities!
+		//	Tie twoDimArr into $('.boxes'); childNodes[] thur childNodes[17] ODD ONLY!
+		// $board[0].childNodes[1].outerHTML.includes('O');
+		if (turn >= 5) {
+			console.log(player.grid);
+			// when the game progresses to turn>=5, start checking $board for Win/Tie boolean
+			if ( $board[0].childNodes[1].outerHTML.includes(player.grid) && $board[0].childNodes[7].outerHTML.includes(player.grid) && $board[0].childNodes[13].outerHTML.includes(player.grid) ) {
+				console.log(player.grid + ' is winner');
+			} else if ($board[0].childNodes[3].outerHTML.includes(player.grid) && $board[0].childNodes[9].outerHTML.includes(player.grid) && $board[0].childNodes[15].outerHTML.includes(player.grid)) {
+				console.log(player.grid + ' is winner');
+			} else if ($board[0].childNodes[5].outerHTML.includes(player.grid) && $board[0].childNodes[11].outerHTML.includes(player.grid) && $board[0].childNodes[17].outerHTML.includes(player.grid)) {
+				console.log(player.grid + ' is winner');
+			} else if ($board[0].childNodes[1].outerHTML.includes(player.grid) && $board[0].childNodes[3].outerHTML.includes(player.grid) && $board[0].childNodes[5].outerHTML.includes(player.grid)) {
+				console.log(player.grid + ' is winner');
+			} else if ($board[0].childNodes[7].outerHTML.includes(player.grid) && $board[0].childNodes[9].outerHTML.includes(player.grid) && $board[0].childNodes[11].outerHTML.includes(player.grid)) {
+				console.log(player.grid + ' is winner');
+			} else if ($board[0].childNodes[13].outerHTML.includes(player.grid) && $board[0].childNodes[15].outerHTML.includes(player.grid) && $board[0].childNodes[17].outerHTML.includes(player.grid)) {
+				console.log(player.grid + ' is winner');
+			} else if ($board[0].childNodes[1].outerHTML.includes(player.grid) && $board[0].childNodes[9].outerHTML.includes(player.grid) && $board[0].childNodes[17].outerHTML.includes(player.grid)) {
+				console.log(player.grid + ' is winner');
+			} else if ($board[0].childNodes[5].outerHTML.includes(player.grid) && $board[0].childNodes[9].outerHTML.includes(player.grid) && $board[0].childNodes[13].outerHTML.includes(player.grid)) {
+				console.log(player.grid + ' is winner');
+			}
+		}
+	}
+
+
+
+
+
+
 
 
 	//	TODO: Add programming so that when the game ends, the board disappears and the game end screen appears. Use the tictactoe-03-winner1.png and tictactoe-04-winner2.png mockups, and the win.txt HTML snippet for guidance.
