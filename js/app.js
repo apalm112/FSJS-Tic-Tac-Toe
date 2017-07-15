@@ -150,19 +150,31 @@
   function clickIt(player) {
     // TODO: function is not dropping player1 class box-filled-1, won't add a 'X' to the game board.
     // Slack from N Hampton: You would assign another .one() handler to each of those boxes in that instance. `jQuery.one()` is the same as `jQuery.on()`, except that it runs `$(this).off(event)` at the end of the callback
-      $('.box').one('click', function() {
-				// Conditional checks the board li to see if it's MT, if MT then change color/img.
-        if ($(this)[0].attributes[1].value === 'MT') {
-          $(this).css({'background-image': 'url(' + player.svg + ')'});
-          $(this).css({'background-color': player.bgColor});
+    $('.box').one('click', function() {
+			// Conditional checks the board li to see if it's MT, if MT then change color/img.
+      if ($(this)[0].attributes[1].value === 'MT') {
+        // TODO: maybe try a IF conditional here that controls which player info is passed in the parameters.  Since clickIT function is the problem.  .one() is taking player1 params & holding onto them from the start.
+        if ( $player1.hasClass('active') ) {
+          $(this).css({'background-image': 'url(' + player1.svg + ')'});
+          $(this).css({'background-color': player1.bgColor});
 					// Set value to 'O' or 'X'
-					$(this)[0].setAttribute('gridValue', player.grid);
+					$(this)[0].setAttribute('gridValue', player1.grid);
           count++;
           turn++;
           console.log(turn);
           togglePlayer();
-          }
-			});
+        } else if ( $player2.hasClass('active') ) {
+          $(this).css({'background-image': 'url(' + player2.svg + ')'});
+          $(this).css({'background-color': player2.bgColor});
+          // Set value to 'O' or 'X'
+          $(this)[0].setAttribute('gridValue', player2.grid);
+          count++;
+          turn++;
+          console.log(turn);
+          togglePlayer();
+        }
+      }
+		});
   }
 
   function togglePlayer() {
