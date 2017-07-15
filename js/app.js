@@ -70,7 +70,8 @@
     svg: 'img/o.svg',
     boxFill: 'box-filled-1',
     isWinner: false,
-    grid: 'O'
+    grid: 'O',
+    specialBox: 'box box-filled-1'
   };
 
   const player2 = {
@@ -180,6 +181,8 @@
           $(this).css({'background-color': player.bgColor});
           // Set atr to 'O' or 'X'
           $(this)[0].setAttribute('fuck', player.grid);
+          $(this)[0].setAttribute('class', player.specialBox);
+
           // console.log('$(this)[0].attribute[1].value is on line below: ');
           // console.log( $(this)[0].attributes[1].value );
           // console.log( $(this).attr('fuck', player.grid) );
@@ -187,7 +190,7 @@
           turn++;
           console.log(turn);
         //  hover();
-          increaseCount();
+          // increaseCount();
           // console.log('player.grid is: ' + player.grid);
           //  console.log(count + ' <--count, FUCK THIS SHIT!');
         }
