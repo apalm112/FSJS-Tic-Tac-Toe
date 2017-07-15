@@ -19,8 +19,6 @@
     // code
   }(window);
 */
-
-
 // Global Variables -----------------------------------------------------
   // Get the start screen div
   const $start = $('#start');
@@ -30,34 +28,12 @@
   const $finish1 = $('#finish1');
   const $finish2 = $('#finish2');
   const $tie = $('#tie');
-
   // Gets 'O' & 'X' divs at top of game board
   const $player1 = $('#player1');
   const $player2 = $('#player2');
   // Gets entire game board div
+	// Gets ul of of game board
   const $board = $('.boxes');
-  // Gets ul of of game board
-  const $boxes = $('.boxes');
-  // create MT array to hold stuff?????
-
-
-  let checkArr = [];
-  // Get all the li's of the game grid
-	let newWinCombos = [
-	// per my grid layout setup, which does not match the DOM
-	// HORIZONTAL
-		[0, 1, 2],
-		[3, 4, 5],
-		[6, 7, 8],
-	// DIAGONAL
-		[0, 4, 8],
-		[2, 4, 6],
-	// VERICAL
-		[0, 3, 6],
-		[1, 4, 7],
-		[2, 5, 8]
-	];
-
 	let checkWin = [
 	// Win combos for $board[0].childNodes[idx], which matches teh DOM!
 // HORIZONTAL		sums:
@@ -72,10 +48,6 @@
 	[3, 9, 15],	// 27
 	[5, 11, 17]	// 33
 ];
-
-
-
-
   const game = document.querySelectorAll('.boxes');
   // Trying to code 7/13/17
   let gridSquare = document.querySelectorAll('.box');
@@ -211,7 +183,7 @@
 	//	TODO: The game ends when one player has three of their symbols in a row either horizontally, vertically or diagonally. If all of the squares are filled and no players have three in a row, the game is a tie.
 	function checkWinTie(player) {
 		// Function to check for Win/Tie
-		//	on click set gridValue to twoDimArr & turn++
+		//	on click turn++
 		//	when turn >= 5  check twoDimArr for Win
 		//	repeat until turn === 8 declare Win/Tie
 		//	use object boardState ?
@@ -219,7 +191,7 @@
 		//	Tie twoDimArr into $('.boxes'); childNodes[] thur childNodes[17] ODD ONLY!
 		// $board[0].childNodes[1].outerHTML.includes('O');
 		if (turn >= 5) {
-			console.log(player.grid);
+			console.log(turn);
 			// when the game progresses to turn>=5, start checking $board for Win/Tie boolean
 			if ( $board[0].childNodes[1].outerHTML.includes(player.grid) && $board[0].childNodes[7].outerHTML.includes(player.grid) && $board[0].childNodes[13].outerHTML.includes(player.grid) ) {
 				console.log(player.grid + ' is winner');
@@ -237,6 +209,9 @@
 				console.log(player.grid + ' is winner');
 			} else if ($board[0].childNodes[5].outerHTML.includes(player.grid) && $board[0].childNodes[9].outerHTML.includes(player.grid) && $board[0].childNodes[13].outerHTML.includes(player.grid)) {
 				console.log(player.grid + ' is winner');
+			} else if (turn === 9 && player.winner === false){
+				console.log('Its a tie!');
+
 			}
 		}
 	}
