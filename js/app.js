@@ -194,29 +194,39 @@
 			console.log(turn);
 			// when the game progresses to turn>=5, start checking $board for Win/Tie boolean
 			if ( $board[0].childNodes[1].outerHTML.includes(player.grid) && $board[0].childNodes[7].outerHTML.includes(player.grid) && $board[0].childNodes[13].outerHTML.includes(player.grid) ) {
+				player.isWinner = true;
 				console.log(player.grid + ' is winner');
 			} else if ($board[0].childNodes[3].outerHTML.includes(player.grid) && $board[0].childNodes[9].outerHTML.includes(player.grid) && $board[0].childNodes[15].outerHTML.includes(player.grid)) {
+				player.isWinner = true;
 				console.log(player.grid + ' is winner');
 			} else if ($board[0].childNodes[5].outerHTML.includes(player.grid) && $board[0].childNodes[11].outerHTML.includes(player.grid) && $board[0].childNodes[17].outerHTML.includes(player.grid)) {
+				player.isWinner = true;
 				console.log(player.grid + ' is winner');
 			} else if ($board[0].childNodes[1].outerHTML.includes(player.grid) && $board[0].childNodes[3].outerHTML.includes(player.grid) && $board[0].childNodes[5].outerHTML.includes(player.grid)) {
+				player.isWinner = true;
 				console.log(player.grid + ' is winner');
 			} else if ($board[0].childNodes[7].outerHTML.includes(player.grid) && $board[0].childNodes[9].outerHTML.includes(player.grid) && $board[0].childNodes[11].outerHTML.includes(player.grid)) {
+				player.isWinner = true;
 				console.log(player.grid + ' is winner');
 			} else if ($board[0].childNodes[13].outerHTML.includes(player.grid) && $board[0].childNodes[15].outerHTML.includes(player.grid) && $board[0].childNodes[17].outerHTML.includes(player.grid)) {
+				player.isWinner = true;
 				console.log(player.grid + ' is winner');
 			} else if ($board[0].childNodes[1].outerHTML.includes(player.grid) && $board[0].childNodes[9].outerHTML.includes(player.grid) && $board[0].childNodes[17].outerHTML.includes(player.grid)) {
+				player.isWinner = true;
 				console.log(player.grid + ' is winner');
 			} else if ($board[0].childNodes[5].outerHTML.includes(player.grid) && $board[0].childNodes[9].outerHTML.includes(player.grid) && $board[0].childNodes[13].outerHTML.includes(player.grid)) {
+				player.isWinner = true;
 				console.log(player.grid + ' is winner');
-			} else if (turn === 9 && player.winner === false){
-				console.log('Its a tie!');
-
 			}
+		checkTie(player);
 		}
 	}
 
-
+	function checkTie(player) {
+		if (turn === 9 && player1.isWinner === false && player2.isWinner === false){
+			console.log('Its a tie!');
+		}
+	}
 
 
 
