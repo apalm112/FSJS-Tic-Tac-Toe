@@ -3,7 +3,6 @@
 // Treehouse Project-04: Tic-Tac-Toe Game
 'use strict';
 (function(module) {
-
 /*
   From Treehouse The Module Pattern:
 
@@ -34,31 +33,27 @@
   // Gets entire game board div
 	// Gets ul of of game board
   const $board = $('.boxes');
-	let checkWin = [
+	let checkWinArr = [
 	// Win combos for $board[0].childNodes[idx], which matches teh DOM!
-// HORIZONTAL		sums:
-	[1, 3, 5],	// 9
-	[7, 9, 11],	// 27
-	[13, 15, 17],	// 45
+// HORIZONTAL
+	[1, 3, 5],
+	[7, 9, 11],
+	[13, 15, 17],
 // DIAGONAL
-	[1, 9, 17],	// 27
-	[5, 9, 13],	// 27
+	[1, 9, 17],
+	[5, 9, 13],
 // VERTICAL
-	[1, 7, 13],	// 21
-	[3, 9, 15],	// 27
-	[5, 11, 17]	// 33
+	[1, 7, 13],
+	[3, 9, 15],
+	[5, 11, 17]
 ];
-  const game = document.querySelectorAll('.boxes');
-  // Trying to code 7/13/17
-  let gridSquare = document.querySelectorAll('.box');
   let turn = 0;
-  // Count something????
-  let count = 0;
 
   const player1 = {
     bgColor: '#FFA000',
     svg: 'img/o.svg',
     boxFill: 'box-filled-1',
+		svgFill: 'svg-filled-1',
 		grid: 'O',
     isWinner: false,
 		name: 'player1'
@@ -67,20 +62,12 @@
     bgColor: '#3688C3',
     svg: 'img/x.svg',
     boxFill: 'box-filled-2',
+		svgFill: 'svg-filled-2',
 		grid: 'X',
     isWinner: false,
 		name: 'player2'
   };
-
-  let liNodeList = document.querySelectorAll('.box');
-  let liHTMLCollection = document.getElementsByClassName('.box');
-
-  const boardState = {
-    // Object to experiment w/ making an Object to track the state of the game in the DOM & maybe help control the game w/ its own methods.
-  };
-
 // Main Functions ------------------------------------------------------------
-
   // On page load, show the start screen.
   $(document).ready(function() {
     $start.css('display', 'block');
@@ -123,15 +110,12 @@
       setGridToZero('MT');
       $player1.toggleClass('active');
       hover(player1);
-      clickIt(player1);
+      clickIt();
     });
   }
 
-  let liZero = document.querySelectorAll('.box');
-  // TEST LINE BELOW
-  let turd = document.getElementsByClassName('.box');
-
   function setGridToZero(num) {
+		let liZero = document.querySelectorAll('.box');
     for (let idx=0;idx<liZero.length;idx++) {
      liZero[idx].setAttribute('gridValue', num);
     }
@@ -141,10 +125,12 @@
   // Function checks if grid square is empty, if so then displays current player symbol & color on grid.
     $('.box').hover(
       function() {
-            $(this).toggleClass(player.boxFill, 'MT');
-          });
+				// $(this).toggleClass(player.boxFill, 'MT');
+				$(this).toggleClass(player.svgFill, 'MT');
+      });
   }
-  function clickIt(player) {
+
+  function clickIt() {
     $('.box').one('click', function() {
 			// Conditional checks the board li to see if it's MT, if MT then change color/img.
       if ($(this)[0].attributes[1].value === 'MT') {
@@ -153,41 +139,30 @@
           $(this).css({'background-color': player1.bgColor});
 					// Set value to 'O' or 'X'
 					$(this)[0].setAttribute('gridValue', player1.grid);
-          count++;
           turn++;
           togglePlayer(player1);
-					// checkWinTie();
         } else if ( $player2.hasClass('active') ) {
           $(this).css({'background-image': 'url(' + player2.svg + ')'});
           $(this).css({'background-color': player2.bgColor});
           // Set value to 'O' or 'X'
           $(this)[0].setAttribute('gridValue', player2.grid);
-          count++;
           turn++;
           togglePlayer(player2);
-					// checkWinTie();
         }
       }
 		});
   }
 
   function togglePlayer(player) {
-    // Play alternates between X and O.
+    // Controls turns between X and O.
     $player1.toggleClass('active');
     $player2.toggleClass('active');
     hover(player2);
-    clickIt(player2);
-		checkWinTie(player);
+		checkWin(player);
   }
 
-	//	TODO: The game ends when one player has three of their symbols in a row either horizontally, vertically or diagonally. If all of the squares are filled and no players have three in a row, the game is a tie.
-	function checkWinTie(player) {
+	function checkWin(player) {
 		// Function to check for Win/Tie
-		//	on click turn++
-		//	when turn >= 5  check twoDimArr for Win
-		//	repeat until turn === 8 declare Win/Tie
-		//	use object boardState ?
-		//	NO!  Use hard code the win possibilities!
 		//	Tie twoDimArr into $('.boxes'); childNodes[] thur childNodes[17] ODD ONLY!
 		// $board[0].childNodes[1].outerHTML.includes('O');
 		if (turn >= 5) {
@@ -218,6 +193,7 @@
 				player.isWinner = true;
 				console.log(player.grid + ' is winner');
 			}
+		winner();
 		checkTie(player);
 		}
 	}
@@ -225,17 +201,21 @@
 	function checkTie(player) {
 		if (turn === 9 && player1.isWinner === false && player2.isWinner === false){
 			console.log('Its a tie!');
+			winner();
 		}
 	}
 
-
-
-
-
-
-	//	TODO: Add programming so that when the game ends, the board disappears and the game end screen appears. Use the tictactoe-03-winner1.png and tictactoe-04-winner2.png mockups, and the win.txt HTML snippet for guidance.
-		// Depending on the game results the final screen should:	Show the word "Winner" or the phrase "It's a Tie!"
+	function winner() {
+		//	TODO:
+		if (player1.isWinner) {
+			$finish1.css('display', 'block');
+		} else if (player2.isWinner) {
+			$finish2.css('display', 'block');
+		} else if (!player1.isWinner && !player1.isWinner && turn === 9) {
+			$tie.css('display', 'block');
+		}
 		// Add the appropriate class to the <div> for the winning screen: <div class="screen screen-win" id="finish"> screen-win-one for player 1, screen-win-two for player two, or screen-win-tie if the game ends with no winner. For example, if player 1 wins, the HTML should look like this: <div class="screen screen-win screen-win-one" id="finish">
+	}
 
 		//	TODO: Add programming so that when a player pushes the "New Game" button, the board appears again, empty, and a new game begins.
 
