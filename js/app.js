@@ -106,26 +106,25 @@
     $button.on('click', function() {
       enterName();
 	    $start.css('display', 'none');
-	    $finish1.css('display', 'none');
-	    $finish2.css('display', 'none');
-			$tie.css('display', 'none');
-      setGridToZero('MT');
-      $player1.toggleClass('active');
-      hover(player1);
-      clickIt();
+			setGridToZero('MT');
+			$player1.toggleClass('active');
+			hover(player1);
+			clickIt();
+	    // $finish1.css('display', 'none');
+	    // $finish2.css('display', 'none');
+			// $tie.css('display', 'none');
     });
   }
 
   function setGridToZero(num) {
 		// Sets game grid li's class="box", gridValue="MT" in order to reset for a new game.
-		let liZero = document.querySelectorAll('.box');
-    for (let idx=0;idx<liZero.length;idx++) {
-     liZero[idx].setAttribute('gridValue', num);
+    for (let idx=0;idx<$box.length;idx++) {
+     $box[idx].setAttribute('gridValue', num);
+		 // reset $board li class="box"
+		 $box.removeClass().addClass('box');
+		 $box[idx].style.backgroundColor = '';
+		 $box[idx].style.backgroundImage = '';
     }
-		// Below loop does not work, see clickIt() TODO
-		for (let idx=0;idx<liZero.legnth;idx++) {
-			liZero[idx].setAttribute('class', '');
-		}
   }
 
   function hover(player) {
@@ -133,8 +132,9 @@
 			// Function checks if grid square is empty, if so then displays current player symbol on grid square.
       function() {
 				$(this).toggleClass(player.svgFill, 'MT');
-      });
-  }
+			});
+	}
+
   function clickIt() {
     $('.box').one('click', function() {
 			// Conditional checks the board li to see if it's MT, if MT then change color/img.
@@ -229,15 +229,23 @@
 		if (player1.isWinner) {
 			const player1Winner = document.getElementsByClassName('nameOne');
 			let setPlayer1Winner = document.getElementsByClassName('wrapper-O');
-			setPlayer1Winner[0].children[0].children[0].textContent = (player1Winner[0].textContent + ' Wins!');
 			$finish1.css('display', 'block');
 			reStartGame();
+			if (player1Winner[0].textContent !== 'Player One') {
+				setPlayer1Winner[0].children[0].children[0].textContent = (player1Winner[0].textContent + ' Wins!');
+			} else {
+				setPlayer1Winner[0].children[0].children[0].textContent = ' Winner';
+			}
 		} else if (player2.isWinner) {
 			const player2Winner = document.getElementsByClassName('nameTwo');
 			let setPlayer2Winner = document.getElementsByClassName('wrapper-X');
-			setPlayer2Winner[0].children[0].children[0].textContent = (player2Winner[0].textContent + ' Wins!');
 			$finish2.css('display', 'block');
 			reStartGame();
+			if (player2Winner[0].textContent !== 'Player Two') {
+				setPlayer2Winner[0].children[0].children[0].textContent = (player2Winner[0].textContent + ' Wins!');
+			} else {
+				setPlayer2Winner[0].children[0].children[0].textContent = 'Winner';
+			}
 		} else if (!player1.isWinner && !player1.isWinner && turn === 9) {
 			$tie.css('display', 'block');
 			reStartGame();
@@ -249,26 +257,30 @@
 
 		function reStartGame() {
 			//	TODO: Add programming so that when a player pushes the "New Game" button, the board appears again, empty, and a new game begins.
-			let $playAgain = $('.button');
-			for (let idx=1;idx<$playAgain.length;idx++) {
-				$playAgain[idx].text = 'Press for New Game';
+			for (let idx=1;idx<$button.length;idx++) {
+				$button[idx].text = 'Press for New Game';
 			}
 
 			$button.on('click', function() {
 		    $finish1.css('display', 'none');
 		    $finish2.css('display', 'none');
 				$tie.css('display', 'none');
+				turn=0;
 	      setGridToZero('MT');
 
-				// reset $board li class="box"
+				player1.isWinner = false;
+				player2.isWinner = false;
 
-	      $player1.toggleClass('active');
+				// Toggle players to reset for new game.
+				if ($player2.hasClass('active')) {
+					$player2.toggleClass('active');
+				}
+	      if ( !$player1.hasClass('active') ) {
+					$player1.toggleClass('active');
+				};
 	      hover(player1);
-	      clickIt();
+	      // clickIt();
 	    });
-
-
-
 		}
 
 		// TODO: PUSH GOALS
