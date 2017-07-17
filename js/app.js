@@ -103,7 +103,7 @@
   function startGame() {
     // On button click, start the game.
     $button.on('click', function() {
-    //  enterName();
+      enterName();
 	    $start.css('display', 'none');
 	    $finish1.css('display', 'none');
 	    $finish2.css('display', 'none');
@@ -206,19 +206,24 @@
 	}
 
 	function winner() {
-		//	TODO:
 		if (player1.isWinner) {
+			const player1Winner = document.getElementsByClassName('nameOne');
+			let setPlayer1Winner = document.getElementsByClassName('wrapper-O');
+			setPlayer1Winner[0].children[0].children[0].textContent = (player1Winner[0].textContent + ' Wins!');
 			$finish1.css('display', 'block');
 		} else if (player2.isWinner) {
+			const player2Winner = document.getElementsByClassName('nameTwo');
+			let setPlayer2Winner = document.getElementsByClassName('wrapper-X');
+
+			setPlayer2Winner[0].children[0].children[0].textContent = (player2Winner[0].textContent + ' Wins!');
 			$finish2.css('display', 'block');
 		} else if (!player1.isWinner && !player1.isWinner && turn === 9) {
 			$tie.css('display', 'block');
 		}
-		// Add the appropriate class to the <div> for the winning screen: <div class="screen screen-win" id="finish"> screen-win-one for player 1, screen-win-two for player two, or screen-win-tie if the game ends with no winner. For example, if player 1 wins, the HTML should look like this: <div class="screen screen-win screen-win-one" id="finish">
 	}
-
+		// TODO:  Finish CSS for win1 & win2 screens
 		//	TODO: Add programming so that when a player pushes the "New Game" button, the board appears again, empty, and a new game begins.
 
-		//	TODO:	Use the module pattern to wrap all of your JavaScript code into a single global variable or an immediately invoked function.
-
+		// TODO: PUSH GOALS
+		//On the start screen, prompt the user add their name before the game starts  Display the player’s name on the board screen during game play  Add programming to support playing against the computer. Only one player plays; the other is controlled by your programming.  Display the player’s name if they win the game
 })(window);
