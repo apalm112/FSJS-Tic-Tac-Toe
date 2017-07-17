@@ -49,6 +49,7 @@
 	[5, 11, 17]
 ];
   let turn = 0;
+	let check1 = $player1.hasClass("active");
 
   const player1 = {
     bgColor: '#FFA000',
@@ -57,7 +58,7 @@
 		svgFill: 'svg-filled-1',
 		grid: 'O',
     isWinner: false,
-		name: 'player1'
+		active: 'check1'
   };
   const player2 = {
     bgColor: '#3688C3',
@@ -66,7 +67,7 @@
 		svgFill: 'svg-filled-2',
 		grid: 'X',
     isWinner: false,
-		name: 'player2'
+		active: 'player2'
   };
 // Main Functions ------------------------------------------------------------
   // On page load, show the start screen.
@@ -129,7 +130,7 @@
 
   function hover(player) {
 		// Function checks if grid square is empty, if so then displays current player symbol on grid square.
-		if ($player1.hasClass('active') ) {
+		if ($player1.hasClass('active'))  {
 		  	$('.box').hover(function() {
 					if ( $(this).attr('gridvalue') === 'MT') {
 					// $(this).toggleClass(player.svgFill, 'MT');
@@ -141,7 +142,7 @@
 						}
 					 }
 				); // close .hover(function
-		}	/* close 1st if */ else if ($player2.hasClass('active')) {
+		}	 /* close 1st if */ else if ($player2.hasClass('active')) {
 			$('.box').hover(function() {
 				if ( $(this).attr('gridvalue') === 'MT') {
 				// $(this).toggleClass(player.svgFill, 'MT');
