@@ -24,6 +24,7 @@
   // Get the button that hides the start screen
   const $button = $('.button');
   // Get 'O' win game div
+
   const $finish1 = $('#finish1');
   const $finish2 = $('#finish2');
   const $tie = $('#tie');
@@ -224,8 +225,11 @@
 				setPlayer1Winner[0].children[0].children[0].textContent = ' Winner';
 			}
 		} else if (player2.isWinner) {
+			// get li label on game screen which holds player 2 name
 			const player2Winner = document.getElementsByClassName('nameTwo');
+			// get div that wraps svg
 			let setPlayer2Winner = document.getElementsByClassName('wrapper-X');
+			// show player 2 win screen
 			$finish2.css('display', 'block');
 			reStartGame();
 			if (player2Winner[0].textContent !== 'Player Two') {
@@ -238,10 +242,6 @@
 			reStartGame();
 		}
 	}
-		// TODO:  Finish CSS for win1 & win2 screens
-
-
-
 		function reStartGame() {
 			for (let idx=1;idx<$button.length;idx++) {
 				$button[idx].text = 'Press for New Game';
@@ -268,6 +268,7 @@
 	    });
 		}
 
+		// TODO:  Finish CSS for win1 & win2 screens
 		// TODO: PUSH GOALS
 		//Add programming to support playing against the computer. Only one player plays; the other is controlled by your programming.
 })(window);
