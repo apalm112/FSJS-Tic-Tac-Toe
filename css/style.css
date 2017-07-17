@@ -109,13 +109,6 @@ header input {
 			margin-top: -25px;
 			margin-bottom: 50px;
   }
-
-			.screen-win-one h1 {
-				margin-left: 650px;
-				font-size: 6.2em;
-				line-height: 0.74em;
-				height: 360px;
-			}
 			.screen-win-one h3 {
 				font-size: 2.17em;
 				color: #fff;
@@ -127,14 +120,7 @@ header input {
 			}
 			.screen-win-one .O {
 				color: #fff;
-				margin: 1em auto;  /* This centers the SVG */
 			}
-			.screen-win-one .svg-with-text {
-/*				background: transparent url('../img/o2.svg') center center no-repeat;
-				background-size: 355px 355px;
-				height: 400px;
-*/			}
-
   .screen-win-two {
     background: #3688C3; }
     .screen-win-two .button {
@@ -146,13 +132,6 @@ header input {
 			margin-top: -25px;
 			margin-bottom: 50px;
 	 }
-
-			.screen-win-two h1 {
-				margin-left: 650px;
-				font-size: 6.2em;
-				line-height: 0.74em;
-				height: 360px;
-			}
 			.screen-win-two h3 {
 				font-size: 2.17em;
 				color: #fff;
@@ -164,14 +143,7 @@ header input {
 			}
 			.screen-win-two .X {
 				color: #fff;
-				margin: 1em auto;  /* This centers the SVG */
 			}
-			/*.screen-win-two .svg-with-text {
-				background: transparent url('../img/x2.svg') center center no-repeat;
-				background-size: 355px 355px;
-				height: 400px;
-			}*/
-
 .board {
   padding-top: 1em; }
   .board h1 {

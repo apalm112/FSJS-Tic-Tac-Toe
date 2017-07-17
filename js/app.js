@@ -3,28 +3,12 @@
 // Treehouse Project-04: Tic-Tac-Toe Game
 'use strict';
 (function(module) {
-/*
-  From Treehouse The Module Pattern:
-
-  (function() {
-    // code
-  }(window) );
-
-  That is the self-enclosing function or
-  the module pattern.
-  Can also use a '+' or '!' sign,
-
-  !function(module) {
-    // code
-  }(window);
-*/
 // Global Variables -----------------------------------------------------
   // Get the start screen div
   const $start = $('#start');
   // Get the button that hides the start screen
   const $button = $('.button');
   // Get 'O' win game div
-
   const $finish1 = $('#finish1');
   const $finish2 = $('#finish2');
   const $tie = $('#tie');
@@ -35,20 +19,6 @@
 	// Gets ul of of game board
   const $board = $('.boxes');
 	const $box = $('.box');
-	const checkWinArr = [
-	// Win combos for $board[0].childNodes[idx], which matches teh DOM!
-// HORIZONTAL
-	[1, 3, 5],
-	[7, 9, 11],
-	[13, 15, 17],
-// DIAGONAL
-	[1, 9, 17],
-	[5, 9, 13],
-// VERTICAL
-	[1, 7, 13],
-	[3, 9, 15],
-	[5, 11, 17]
-];
   let turn = 0;
   const player1 = {
     svg: 'img/o.svg',
@@ -220,22 +190,21 @@
 			$finish1.css('display', 'block');
 			reStartGame();
 			if (player1Winner[0].textContent !== 'Player One') {
-				setPlayer1Winner[0].children[0].children[0].textContent = (player1Winner[0].textContent + ' Wins!');
+				setPlayer1Winner[0].children[0].textContent = (player1Winner[0].textContent + ' Wins!');
 			} else {
-				setPlayer1Winner[0].children[0].children[0].textContent = ' Winner';
+				setPlayer1Winner[0].children[0].textContent = ' Winner';
 			}
 		} else if (player2.isWinner) {
 			// get li label on game screen which holds player 2 name
 			const player2Winner = document.getElementsByClassName('nameTwo');
-			// get div that wraps svg
 			let setPlayer2Winner = document.getElementsByClassName('wrapper-X');
 			// show player 2 win screen
 			$finish2.css('display', 'block');
 			reStartGame();
 			if (player2Winner[0].textContent !== 'Player Two') {
-				setPlayer2Winner[0].children[0].children[0].textContent = (player2Winner[0].textContent + ' Wins!');
+				setPlayer2Winner[0].children[0].textContent = (player2Winner[0].textContent + ' Wins!');
 			} else {
-				setPlayer2Winner[0].children[0].children[0].textContent = 'Winner';
+				setPlayer2Winner[0].children[0].textContent = 'Winner';
 			}
 		} else if (!player1.isWinner && !player1.isWinner && turn === 9) {
 			$tie.css('display', 'block');
@@ -246,17 +215,14 @@
 			for (let idx=1;idx<$button.length;idx++) {
 				$button[idx].text = 'Press for New Game';
 			}
-
 			$button.one('click', function() {
 		    $finish1.css('display', 'none');
 		    $finish2.css('display', 'none');
 				$tie.css('display', 'none');
 				turn=0;
 	      setGridToZero('MT');
-
 				player1.isWinner = false;
 				player2.isWinner = false;
-
 				// Toggle players to reset for new game.
 				if ($player2.hasClass('active')) {
 					$player2.toggleClass('active');
@@ -268,7 +234,4 @@
 	    });
 		}
 
-		// TODO:  Finish CSS for win1 & win2 screens
-		// TODO: PUSH GOALS
-		//Add programming to support playing against the computer. Only one player plays; the other is controlled by your programming.
 })(window);
