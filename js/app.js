@@ -28,8 +28,8 @@
   const $finish2 = $('#finish2');
   const $tie = $('#tie');
   // Gets 'O' & 'X' divs at top of game board
+	const $player2 = $('#player2');
   const $player1 = $('#player1');
-  const $player2 = $('#player2');
   // Gets entire game board div
 	// Gets ul of of game board
   const $board = $('.boxes');
@@ -128,12 +128,33 @@
   }
 
   function hover(player) {
-    $('.box').hover(
-			// Function checks if grid square is empty, if so then displays current player symbol on grid square.
-      function() {
-				$(this).toggleClass(player.svgFill, 'MT');
-			});
-	}
+		// Function checks if grid square is empty, if so then displays current player symbol on grid square.
+		if ($player1.hasClass('active') ) {
+		  	$('.box').hover(function() {
+					if ( $(this).attr('gridvalue') === 'MT') {
+					// $(this).toggleClass(player.svgFill, 'MT');
+					$(this).css({'backgroundImage': 'url(' + player1.svg + ')'});
+					} //this one for 2nd if
+				}, function() {
+						if ( $(this).attr('gridvalue') === 'MT') {
+							$(this).css({'backgroundImage': ''});
+						}
+					 }
+				); // close .hover(function
+		}	/* close 1st if */ else if ($player2.hasClass('active')) {
+			$('.box').hover(function() {
+				if ( $(this).attr('gridvalue') === 'MT') {
+				// $(this).toggleClass(player.svgFill, 'MT');
+				$(this).css({'backgroundImage': 'url(' + player2.svg + ')'});
+				} //this one for 2nd if
+			}, function() {
+					if ( $(this).attr('gridvalue') === 'MT') {
+						$(this).css({'backgroundImage': ''});
+					}
+				 }
+			); // close .hover(function
+		}
+	} // close main function
 
   function clickIt() {
     $('.box').one('click', function() {
@@ -141,15 +162,17 @@
       if ($(this)[0].attributes[1].value === 'MT') {
         if ( $player1.hasClass('active') ) {
 					// TODO:  problem: css being changed in js.  fix: change below code to add the class box-filled-1 or box-filled-2 when grid square is clicked.
-          $(this).css({'background-image': 'url(' + player1.svg + ')'});
+/*          $(this).css({'background-image': 'url(' + player1.svg + ')'});
           $(this).css({'background-color': player1.bgColor});
+*/					$(this).addClass(player1.boxFill);
 					// Set value to 'O' or 'X'
 					$(this)[0].setAttribute('gridValue', player1.grid);
           turn++;
           togglePlayer(player1);
         } else if ( $player2.hasClass('active') ) {
-          $(this).css({'background-image': 'url(' + player2.svg + ')'});
+/*          $(this).css({'background-image': 'url(' + player2.svg + ')'});
           $(this).css({'background-color': player2.bgColor});
+*/					$(this).addClass(player2.boxFill);
           // Set value to 'O' or 'X'
           $(this)[0].setAttribute('gridValue', player2.grid);
           turn++;
@@ -261,11 +284,12 @@
 				$button[idx].text = 'Press for New Game';
 			}
 
-			$button.on('click', function() {
+			$button.one('click', function() {
 		    $finish1.css('display', 'none');
 		    $finish2.css('display', 'none');
 				$tie.css('display', 'none');
 				turn=0;
+				console.log('New Game: Turn set to Zero!');
 	      setGridToZero('MT');
 
 				player1.isWinner = false;
