@@ -107,6 +107,7 @@
 	    $start.css('display', 'none');
 	    $finish1.css('display', 'none');
 	    $finish2.css('display', 'none');
+			$tie.css('display', 'none');
       setGridToZero('MT');
       $player1.toggleClass('active');
       hover(player1);
@@ -211,18 +212,26 @@
 			let setPlayer1Winner = document.getElementsByClassName('wrapper-O');
 			setPlayer1Winner[0].children[0].children[0].textContent = (player1Winner[0].textContent + ' Wins!');
 			$finish1.css('display', 'block');
+			reStartGame();
 		} else if (player2.isWinner) {
 			const player2Winner = document.getElementsByClassName('nameTwo');
 			let setPlayer2Winner = document.getElementsByClassName('wrapper-X');
-
 			setPlayer2Winner[0].children[0].children[0].textContent = (player2Winner[0].textContent + ' Wins!');
 			$finish2.css('display', 'block');
+			reStartGame();
 		} else if (!player1.isWinner && !player1.isWinner && turn === 9) {
 			$tie.css('display', 'block');
+			reStartGame();
 		}
 	}
 		// TODO:  Finish CSS for win1 & win2 screens
-		//	TODO: Add programming so that when a player pushes the "New Game" button, the board appears again, empty, and a new game begins.
+
+
+
+		function reStartGame() {
+			//	TODO: Add programming so that when a player pushes the "New Game" button, the board appears again, empty, and a new game begins.
+
+		}
 
 		// TODO: PUSH GOALS
 		//On the start screen, prompt the user add their name before the game starts  Display the player’s name on the board screen during game play  Add programming to support playing against the computer. Only one player plays; the other is controlled by your programming.  Display the player’s name if they win the game
