@@ -33,7 +33,8 @@
   // Gets entire game board div
 	// Gets ul of of game board
   const $board = $('.boxes');
-	let checkWinArr = [
+	const $box = $('.box');
+	const checkWinArr = [
 	// Win combos for $board[0].childNodes[idx], which matches teh DOM!
 // HORIZONTAL
 	[1, 3, 5],
@@ -116,26 +117,30 @@
   }
 
   function setGridToZero(num) {
+		// Sets game grid li's class="box", gridValue="MT" in order to reset for a new game.
 		let liZero = document.querySelectorAll('.box');
     for (let idx=0;idx<liZero.length;idx++) {
      liZero[idx].setAttribute('gridValue', num);
     }
+		// Below loop does not work, see clickIt() TODO
+		for (let idx=0;idx<liZero.legnth;idx++) {
+			liZero[idx].setAttribute('class', '');
+		}
   }
 
   function hover(player) {
-  // Function checks if grid square is empty, if so then displays current player symbol & color on grid.
     $('.box').hover(
+			// Function checks if grid square is empty, if so then displays current player symbol on grid square.
       function() {
-				// $(this).toggleClass(player.boxFill, 'MT');
 				$(this).toggleClass(player.svgFill, 'MT');
       });
   }
-
   function clickIt() {
     $('.box').one('click', function() {
 			// Conditional checks the board li to see if it's MT, if MT then change color/img.
       if ($(this)[0].attributes[1].value === 'MT') {
         if ( $player1.hasClass('active') ) {
+					// TODO:  problem: css being changed in js.  fix: change below code to add the class box-filled-1 or box-filled-2 when grid square is clicked.
           $(this).css({'background-image': 'url(' + player1.svg + ')'});
           $(this).css({'background-color': player1.bgColor});
 					// Set value to 'O' or 'X'
@@ -153,7 +158,21 @@
       }
 		});
   }
-
+/*	function newClickIt() {
+		$('.box').one('click', function() {
+			if ( $(this)[0].attributes[0].value === 'box svg-filled-1' ||   ( $(this)[0].attributes[0].value === 'box svg-filled-1 svg-filled-2' )) {
+				if ($player1.hasClass('active')) {
+					$(this)[0].setAttribute('class', 'box box-filled-1');
+					turn++;
+					togglePlayer(player1);
+				} else if ( $player2.hasClass('active')) {
+					$(this)[0].setAttribute('class', 'box box-filled-2');
+					turn++;
+					togglePlayer(player2);
+				}
+			}
+		});
+	}*/
   function togglePlayer(player) {
     // Controls turns between X and O.
     $player1.toggleClass('active');
@@ -230,6 +249,25 @@
 
 		function reStartGame() {
 			//	TODO: Add programming so that when a player pushes the "New Game" button, the board appears again, empty, and a new game begins.
+			let $playAgain = $('.button');
+			for (let idx=1;idx<$playAgain.length;idx++) {
+				$playAgain[idx].text = 'Press for New Game';
+			}
+
+			$button.on('click', function() {
+		    $finish1.css('display', 'none');
+		    $finish2.css('display', 'none');
+				$tie.css('display', 'none');
+	      setGridToZero('MT');
+
+				// reset $board li class="box"
+
+	      $player1.toggleClass('active');
+	      hover(player1);
+	      clickIt();
+	    });
+
+
 
 		}
 
