@@ -1,6 +1,6 @@
 // Treehouse Project-04: Tic-Tac-Toe Game
 'use strict';
-(function(module) {
+(function() {
 // Global Variables -----------------------------------------------------
   // Get the various screen divs
   const $start = $('#start');
