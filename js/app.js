@@ -1,3 +1,4 @@
+/* eslint-disable */
 // Treehouse Project-04: Tic-Tac-Toe Game
 'use strict';
 (function() {
