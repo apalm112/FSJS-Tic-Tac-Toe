@@ -153,7 +153,7 @@
 		[1, 7, 13],
 		[3, 9, 15],
 		[5, 11, 17]*/
-		// This could be simpler w/: $board[0].children[0].outerHTML.includes works in the console
+		// This could be simpler w/: $board[0].children[0].outerHTML.includes
 		if ( $board[0].childNodes[1].outerHTML.includes(player.grid) && $board[0].childNodes[7].outerHTML.includes(player.grid) && $board[0].childNodes[13].outerHTML.includes(player.grid) ) {
 			player.isWinner = true;
 		} else if ($board[0].childNodes[3].outerHTML.includes(player.grid) && $board[0].childNodes[9].outerHTML.includes(player.grid) && $board[0].childNodes[15].outerHTML.includes(player.grid)) {
