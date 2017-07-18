@@ -15,6 +15,22 @@ h1 {
   text-align: left;
   width: 1.875em; }
 
+header input {
+  margin-bottom: 10px;
+}
+
+.nameTwo {
+  float: right;
+  margin-top: 1em;
+  margin-right: 8em;
+}
+
+.nameOne {
+  float: left;
+  margin-top: 1em;
+  margin-left: 8em;
+}
+
 .button {
   background: #fff;
   border-radius: 4px;
@@ -65,22 +81,69 @@ h1 {
       line-height: 0;
       z-index: -1; }
   .screen-win-tie {
-    background: #54D17A; }   
+    background: #54D17A;
+	}
+	.screen-win-tie h1 {
+		margin-left: 760px;
+		margin-bottom: 100px;
+		font-size: 6.2em;
+		line-height: 0.74em;
+	}
+	.screen-win-tie h3 {
+		font-size: 2.17em;
+		color: #fff;
+		width: 0.435em;
+		margin: 0 auto;
+		margin-left: 790px;
+		margin-bottom: 100px;
+		line-height: 0.7em;
+	}
   .screen-win-one {
     background: #FFA000; }
     .screen-win-one .button {
       color: #3688C3; }
     .screen-win-one p:before {
       content: "o";
-      top: 1.75rem; }
+      top: 1.75rem;
+			height: 300px;
+			margin-top: -25px;
+			margin-bottom: 50px;
+  }
+			.screen-win-one h3 {
+				font-size: 2.17em;
+				color: #fff;
+				width: 0.435em;
+				margin: 0 auto;
+				margin-left: 790px;
+				margin-bottom: 200px;
+				line-height: 0.7em;
+			}
+			.screen-win-one .O {
+				color: #fff;
+			}
   .screen-win-two {
     background: #3688C3; }
     .screen-win-two .button {
       color: #FFA000; }
     .screen-win-two p:before {
       content: "×";
-      top: 4.5rem; }
-
+      top: 4.5rem;
+			height: 300px;
+			margin-top: -25px;
+			margin-bottom: 50px;
+	 }
+			.screen-win-two h3 {
+				font-size: 2.17em;
+				color: #fff;
+				width: 0.435em;
+				margin: 0 auto;
+				margin-left: 790px;
+				margin-bottom: 200px;
+				line-height: 0.7em;
+			}
+			.screen-win-two .X {
+				color: #fff;
+			}
 .board {
   padding-top: 1em; }
   .board h1 {
@@ -107,9 +170,11 @@ h1 {
   #player1.active svg g, #player2.active svg g {
     fill: #fff; }
   #player1.active {
-    background: #FFA000; }
+    background: #FFA000;
+	}
   #player2.active {
-    background: #3688C3; }
+    background: #3688C3;
+	}
 
 .boxes {
   width: 480px;
@@ -125,7 +190,7 @@ h1 {
     padding: 1.75em;
     cursor: pointer;
     box-sizing: border-box;
-    transition: 0.2s ease; 
+    transition: 0.2s ease;
     background-size: 100px 100px;
     background-repeat: no-repeat;
     background-position: center center;}
@@ -137,5 +202,3 @@ h1 {
     .boxes .box-filled-2 {
       background-color: #3688C3;
       background-image: url(../img/x.svg); }
-
-
