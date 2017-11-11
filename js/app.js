@@ -2,41 +2,41 @@
 'use strict';
 (function() {
 // Global Variables -----------------------------------------------------
-  // Get the various screen divs
-  const $start = $('#start');
-  const $button = $('.button');
-  const $finish1 = $('#finish1');
-  const $finish2 = $('#finish2');
-  const $tie = $('#tie');
-  // Gets 'O' & 'X' divs at top of game board
+	// Get the various screen divs
+	const $start = $('#start');
+	const $button = $('.button');
+	const $finish1 = $('#finish1');
+	const $finish2 = $('#finish2');
+	const $tie = $('#tie');
+	// Gets 'O' & 'X' divs at top of game board
 	const $player2 = $('#player2');
-  const $player1 = $('#player1');
+	const $player1 = $('#player1');
 	// Gets ul of of game board
-  const $board = $('.boxes');
+	const $board = $('.boxes');
 	const $box = $('.box');
-  let turn = 0;
-  const player1 = {
-    svg: 'img/o.svg',
-    boxFill: 'box-filled-1',
+	let turn = 0;
+	const player1 = {
+		svg: 'img/o.svg',
+		boxFill: 'box-filled-1',
 		grid: 'O',
-    isWinner: false,
-  };
-  const player2 = {
-    svg: 'img/x.svg',
-    boxFill: 'box-filled-2',
+		isWinner: false,
+	};
+	const player2 = {
+		svg: 'img/x.svg',
+		boxFill: 'box-filled-2',
 		grid: 'X',
-    isWinner: false,
-  };
+		isWinner: false,
+	};
 // Main Functions ------------------------------------------------------------
-  $(document).ready(function() {
+	$(document).ready(function() {
 		// Load the start screen, call function to play game.
-    $start.css('display', 'block');
-    // Hide the various winning screens.
-    $finish1.css('display', 'none');
-    $finish2.css('display', 'none');
-    $tie.css('display', 'none');
+		$start.css('display', 'block');
+		// Hide the various winning screens.
+		$finish1.css('display', 'none');
+		$finish2.css('display', 'none');
+		$tie.css('display', 'none');
 		startGame();
-  });
+	});
 
 	function startGame() {
 		// Function sets up the game to be played, shows the board, starts player1 to move first.
@@ -52,95 +52,94 @@
 		});
 	}
 
-  function enterName() {
-    // If players enter names, then they'll be displayed on the game board & on win screens, default is Player One & Two.
-    const playerOneInput = document.getElementById('name1');
-    const playerOneLabel = document.getElementsByClassName('nameOne');
-    const playerTwoInput = document.getElementById('name2');
-    const playerTwoLabel = document.getElementsByClassName('nameTwo');
+	function enterName() {
+		// If players enter names, then they'll be displayed on the game board & on win screens, default is Player One & Two.
+		const playerOneInput = document.getElementById('name1');
+		const playerOneLabel = document.getElementsByClassName('nameOne');
+		const playerTwoInput = document.getElementById('name2');
+		const playerTwoLabel = document.getElementsByClassName('nameTwo');
 
-    if (playerOneInput.value !== '' && playerTwoInput.value !== '') {
-      playerOneLabel[0].textContent = playerOneInput.value;
-      playerTwoLabel[0].textContent = playerTwoInput.value;
-      $start.css('display', 'none');
-    } else {
-      playerOneInput.placeholder = 'Enter Player 1 Name!';
-      playerTwoInput.placeholder = 'Enter Player 2 Name!';
-    }
-  }
+		if (playerOneInput.value !== '' && playerTwoInput.value !== '') {
+			playerOneLabel[0].textContent = playerOneInput.value;
+			playerTwoLabel[0].textContent = playerTwoInput.value;
+			$start.css('display', 'none');
+		} else {
+			playerOneInput.placeholder = 'Enter Player 1 Name!';
+			playerTwoInput.placeholder = 'Enter Player 2 Name!';
+		}
+	}
 
-  function setGridToZero(num) {
-		// Resets game grid li's class="box", gridValue="MT" for a new game.  Which allows hover & click functions to display player svg/color.
-    for (let idx=0;idx<$box.length;idx++) {
-     $box[idx].setAttribute('gridValue', num);
-		 // reset $board li class="box" & reset background
-		 $box.removeClass().addClass('box');
-		 $box[idx].style.backgroundColor = '';
-		 $box[idx].style.backgroundImage = '';
-    }
-  }
+	function setGridToZero(num) {
+		// Resets game grid li's class="box", gridValue="MT" for a new game.	Which allows hover & click functions to display player svg/color.
+		for (let idx=0;idx<$box.length;idx++) {
+			$box[idx].setAttribute('gridValue', num);
+		// reset $board li class="box" & reset background
+			$box.removeClass().addClass('box');
+			$box[idx].style.backgroundColor = '';
+			$box[idx].style.backgroundImage = '';
+		}
+	}
 
-  function hover(player) {
+	function hover(player) {
 		// Function checks for player active status & if square is empty, if so then displays current player symbol on square & removes it on mouseout.
-		if ($player1.hasClass('active'))  {
-		  	$('.box').hover(function() {
-					if ( $(this).attr('gridvalue') === 'MT') {
+		if ($player1.hasClass('active'))	{
+			$('.box').hover(function() {
+				if ( $(this).attr('gridvalue') === 'MT') {
 					$(this).css({'backgroundImage': 'url(' + player1.svg + ')'});
-					}
-				}, function() {
-						if ( $(this).attr('gridvalue') === 'MT') {
-							$(this).css({'backgroundImage': ''});
-						}
-					 }
+				}
+			}, function() {
+				if ( $(this).attr('gridvalue') === 'MT') {
+					$(this).css({'backgroundImage': ''});
+				}
+			}
 				);
 		} else if ($player2.hasClass('active')) {
 			$('.box').hover(function() {
-				if ( $(this).attr('gridvalue') === 'MT') {
-				$(this).css({'backgroundImage': 'url(' + player2.svg + ')'});
+				if ( $(this).attr('gridvalue') === 'MT') {			$(this).css({'backgroundImage': 'url(' + player2.svg + ')'});
 				}
 			}, function() {
-					if ( $(this).attr('gridvalue') === 'MT') {
-						$(this).css({'backgroundImage': ''});
-					}
-				 }
+				if ( $(this).attr('gridvalue') === 'MT') {
+					$(this).css({'backgroundImage': ''});
+				}
+			}
 			);
 		}
 	}
 
-  function clickSquare() {
+	function clickSquare() {
 		// Function allows player to only pick an empty square.
-    $('.box').one('click', function() {
+		$('.box').one('click', function() {
 			// Conditional checks the board li to see if it's MT, if MT then set color/img to current player.
-      if ($(this)[0].attributes[1].value === 'MT') {
-        if ( $player1.hasClass('active') ) {
+			if ($(this)[0].attributes[1].value === 'MT') {
+				if ( $player1.hasClass('active') ) {
 					$(this).addClass(player1.boxFill);
 					// Set value to 'O' or 'X'
 					$(this)[0].setAttribute('gridValue', player1.grid);
-          turn++;
-          togglePlayer(player1);
-        } else if ( $player2.hasClass('active') ) {
+					turn++;
+					togglePlayer(player1);
+				} else if ( $player2.hasClass('active') ) {
 					$(this).addClass(player2.boxFill);
-          // Set value to 'O' or 'X'
-          $(this)[0].setAttribute('gridValue', player2.grid);
-          turn++;
-          togglePlayer(player2);
-        }
-      }
+					// Set value to 'O' or 'X'
+					$(this)[0].setAttribute('gridValue', player2.grid);
+					turn++;
+					togglePlayer(player2);
+				}
+			}
 		});
-  }
+	}
 
-  function togglePlayer(player) {
-    // Changes turns between players, once game has reached 5 turns, starts checking for winning combos.
-    $player1.toggleClass('active');
-    $player2.toggleClass('active');
-    hover(player2);
+	function togglePlayer(player) {
+		// Changes turns between players, once game has reached 5 turns, starts checking for winning combos.
+		$player1.toggleClass('active');
+		$player2.toggleClass('active');
+		hover(player2);
 		if (turn >= 5) {
 			checkWin(player);
 		}
-  }
+	}
 
 	function checkWin(player) {
-		/*Function checks for Win/Tie combinations by comparing gridvalue attribute of board li's.  The gridvalue is set to O/X when a player clicks on an empty square.
+		/*Function checks for Win/Tie combinations by comparing gridvalue attribute of board li's.	The gridvalue is set to O/X when a player clicks on an empty square.
 		HORIZONTAL
 		[1, 3, 5],
 		[7, 9, 11],
@@ -210,30 +209,30 @@
 		}
 	}
 
-		function reStartGame() {
-			// Sets buttons to clear the win/tie screens, resets the game board to initial values for a new game.
-			for (let idx=1;idx<$button.length;idx++) {
-				$button[idx].text = 'Press for New Game';
-			}
-			$button.one('click', function() {
-		    $finish1.css('display', 'none');
-		    $finish2.css('display', 'none');
-				$tie.css('display', 'none');
-				turn=0;
-	      setGridToZero('MT');
-				player1.isWinner = false;
-				player2.isWinner = false;
-				// Toggle players to reset for new game.
-				if ($player2.hasClass('active')) {
-					// If player2 is active, then remove class="active"
-					$player2.toggleClass('active');
-				}
-				// Sets player1 to go first in new game.
-	      if ( !$player1.hasClass('active') ) {
-					$player1.toggleClass('active');
-				}
-	      hover(player1);
-	    });
+	function reStartGame() {
+		// Sets buttons to clear the win/tie screens, resets the game board to initial values for a new game.
+		for (let idx=1;idx<$button.length;idx++) {
+			$button[idx].text = 'Press for New Game';
 		}
+		$button.one('click', function() {
+			$finish1.css('display', 'none');
+			$finish2.css('display', 'none');
+			$tie.css('display', 'none');
+			turn=0;
+			setGridToZero('MT');
+			player1.isWinner = false;
+			player2.isWinner = false;
+			// Toggle players to reset for new game.
+			if ($player2.hasClass('active')) {
+				// If player2 is active, then remove class="active"
+				$player2.toggleClass('active');
+			}
+			// Sets player1 to go first in new game.
+			if ( !$player1.hasClass('active') ) {
+				$player1.toggleClass('active');
+			}
+			hover(player1);
+		});
+	}
 
 })(window);
