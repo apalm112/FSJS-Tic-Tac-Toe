@@ -10,7 +10,7 @@ body {
 *
 *
  */
- .translateZ{
+ /*.translateZ{
    transform: translateZ(1px);
    transition: transform 0.5s ease;
  }
@@ -24,7 +24,7 @@ body {
   .translateZ{
 
 	transform: rotate3d(30, 20, 20, 90deg) translateZ(250px);
-}
+}*/
  /*
  *
  *  End Code my from my Codepen Account.
