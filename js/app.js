@@ -212,7 +212,7 @@
 	function reStartGame() {
 		// Sets buttons to clear the win/tie screens, resets the game board to initial values for a new game.
 		for (let idx=1;idx<$button.length;idx++) {
-			$button[idx].text = 'Press for New Game';
+			$button[idx].text = 'New Game';
 		}
 		$button.one('click', function() {
 			$finish1.css('display', 'none');
